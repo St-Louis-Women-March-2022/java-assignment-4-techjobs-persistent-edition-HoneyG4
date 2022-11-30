@@ -2,23 +2,27 @@ package org.launchcode.techjobs.persistent.models;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 @MappedSuperclass
 public abstract class AbstractEntity {
 @Id
 @GeneratedValue
-    private int id;
+private int id;
 
-@NotBlank
+@NotNull(message = "Name required")
 @Size(max = 100)
+private String name;
 
-    private String name;
+    public AbstractEntity() {
+
+    }
 
     public int getId() {
         return id;
     }
+
 
     public String getName() {
         return name;

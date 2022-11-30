@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("Skill")
+@RequestMapping("skills")
 public class SkillController {
     @Autowired
     private SkillRepository skillRepository;
@@ -21,6 +21,12 @@ public class SkillController {
     public SkillController(SkillRepository skillRepository) {
         this.skillRepository = skillRepository;
     }
+
+    public SkillController() {
+
+    }
+
+
     @GetMapping("add")
     public String displayAddSkillForm (Model model){
         model.addAttribute(new Skill());
@@ -54,8 +60,8 @@ public class SkillController {
     }
     @GetMapping("")
     public String index(Model model){
-        model.addAttribute("skills", skillRepository.findAll());
-        return "skill/index";
+        model.addAttribute("skill", skillRepository.findAll());
+        return "skills/index";
     }
 
 
