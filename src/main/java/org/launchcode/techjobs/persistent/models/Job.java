@@ -8,19 +8,19 @@ import java.util.List;
 @Entity
 public class Job extends AbstractEntity {
 
-    @ManyToOne
+    @ManyToOne()
     private Employer employer;
     @NotNull
     @ManyToMany()
-    private  List<Skill> skills = new ArrayList<>();
+    private List<Skill> skills = new ArrayList<>();
 
     public Job() {
     }
 
-    public Job(Employer employer,List<Skill> skills) {
+    public Job(Employer employer,List<Skill> skill) {
 
         this.employer = employer;
-        this.skills = skills;
+        this.skills = skill;
     }
     // Getters and setters.
 

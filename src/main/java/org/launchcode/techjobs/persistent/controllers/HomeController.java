@@ -28,34 +28,13 @@ public class HomeController {
     @Autowired
     private  JobRepository jobRepository;
 
-    public EmployerRepository getEmployerRepository() {
-        return employerRepository;
-    }
 
-    public void setEmployerRepository(EmployerRepository employerRepository) {
-        this.employerRepository = employerRepository;
-    }
-
-    public SkillRepository getSkillRepository() {
-        return skillRepository;
-    }
-
-    public JobRepository getJobRepository() {
-        return jobRepository;
-    }
-
-    public void setJobRepository(JobRepository jobRepository) {
-        this.jobRepository = jobRepository;
-    }
-
-    public void setSkillRepository(SkillRepository skillRepository) {
-        this.skillRepository = skillRepository;
-    }
 
     @RequestMapping("")
     public String index(Model model) {
 
         model.addAttribute("title", "My Jobs");
+        model.addAttribute("jobs", jobRepository.findAll());
 
         return "index";
     }
@@ -95,8 +74,15 @@ public class HomeController {
 
      @GetMapping("view/{jobId}")
      public String displayViewJob(Model model, @PathVariable int jobId) {
-        model.addAttribute("jobs", jobRepository.findById(jobId));
-            return "view";
+         Optional optJob= jobRepository.findById(jobId);
+         if (optJob.isPresent()) {
+             Job job = (Job) optJob.get();
+             model.addAttribute("job", job);
+             return "view";
+         } else {
+             return "redirect:../";
+         }
+
 
 
   }

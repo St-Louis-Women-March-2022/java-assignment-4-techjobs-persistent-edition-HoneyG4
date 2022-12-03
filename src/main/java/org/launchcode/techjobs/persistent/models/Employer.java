@@ -17,13 +17,18 @@ public class Employer extends AbstractEntity {
     @Size(max =50)
     private String location;
 
-    public Employer(String location) {
-        this.location = location;
-    }
-
     @OneToMany()
     @JoinColumn(name = "employer_id")
-    private final List<Job> jobs = new ArrayList<>();
+    private List<Job> jobs = new ArrayList<>();
+
+
+    public Employer(String location, List<Job> jobs) {
+        this.location = location;
+        this.jobs = jobs;
+    }
+
+    public Employer() {
+    }
 
     public String getLocation() {
         return location;
@@ -37,10 +42,8 @@ public class Employer extends AbstractEntity {
         return jobs;
     }
 
-    public Employer() {
+    public void setJobs(List<Job> jobs) {
+        this.jobs = jobs;
     }
-
-
-
-    }
+}
 
